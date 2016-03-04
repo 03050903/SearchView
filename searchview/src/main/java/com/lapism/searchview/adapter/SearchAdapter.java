@@ -134,9 +134,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultView
             viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_light_text));
 
             viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+            Spannable s = (Spannable) viewHolder.text.getText();
             if (start != -1 && end < item.get_text().length()) {
-                Spannable s = (Spannable) viewHolder.text.getText();
                 s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_light_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            } else {
+                s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_light_text_highlight)), 0, 0, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
         if (mTheme == SearchCodes.THEME_DARK) {
@@ -144,9 +146,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultView
             viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_dark_text));
 
             viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+            Spannable s = (Spannable) viewHolder.text.getText();
             if (start != -1 && end < item.get_text().length()) {
-                Spannable s = (Spannable) viewHolder.text.getText();
                 s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_dark_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            } else {
+                s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_dark_text_highlight)), 0, 0, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
     }

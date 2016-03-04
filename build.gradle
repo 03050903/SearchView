@@ -3,19 +3,16 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-beta5'
+        classpath "com.android.tools.build:gradle:${GRADLE_PLUGIN_VERSION}"
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
     }
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

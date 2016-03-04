@@ -80,7 +80,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultView
                             mSearchList.add((SearchItem) object);
                         }
                     }
-                    notifyDataSetChanged();
+                    try {
+                        notifyDataSetChanged();
+                    } catch (Exception e) {
+                    }
                 }
             }
         };
@@ -109,28 +112,32 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultView
 
     @Override
     public void onBindViewHolder(ResultViewHolder viewHolder, int position) {
-        SearchItem item = mSearchList.get(position);
+        try {
+            SearchItem item = mSearchList.get(position);
 
-        int start = mStartList.get(position);
-        int end = start + mKeyLength;
+            int start = mStartList.get(position);
+            int end = start + mKeyLength;
 
-        viewHolder.icon_left.setImageResource(item.get_icon());
+            viewHolder.icon_left.setImageResource(item.get_icon());
 
-        if (mTheme == SearchCodes.THEME_LIGHT) {
-            viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_light_icon));
-            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_light_text));
+            if (mTheme == SearchCodes.THEME_LIGHT) {
+                viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_light_icon));
+                viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_light_text));
 
-            viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
-            Spannable s = (Spannable) viewHolder.text.getText();
-            s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_light_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        if (mTheme == SearchCodes.THEME_DARK) {
-            viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_dark_icon));
-            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_dark_text));
+                viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+                Spannable s = (Spannable) viewHolder.text.getText();
+                s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_light_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (mTheme == SearchCodes.THEME_DARK) {
+                viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_dark_icon));
+                viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_dark_text));
 
-            viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
-            Spannable s = (Spannable) viewHolder.text.getText();
-            s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_dark_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+                Spannable s = (Spannable) viewHolder.text.getText();
+                s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_dark_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        } catch (Exception e) {
+            
         }
     }
 

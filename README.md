@@ -24,8 +24,8 @@ Sample application on:
 **Add the dependencies to your gradle file:**
 ```javascript
 dependencies {
-        compile 'com.lapism:searchview:2.2'
-        }
+    compile 'com.klinkerapps:searchview:2.2.2@aar'
+}
 ```
 
 ![Screenshot 1]

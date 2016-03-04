@@ -20,7 +20,7 @@ class SearchAnimator {
     public static void revealInAnimation(final Context mContext, final View view, int duration) {
 
         int cx = view.getWidth() - mContext.getResources().getDimensionPixelSize(R.dimen.reveal);
-        int cy = view.getHeight() / 2;
+        int cy = view.getTop() + mContext.getResources().getDimensionPixelSize(R.dimen.reveal);
 
         if (cx != 0 && cy != 0) {
             float finalRadius = (float) Math.hypot(cx, cy);

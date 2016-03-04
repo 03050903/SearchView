@@ -66,6 +66,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultView
                     }
                     filterResults.values = searchData;
                     filterResults.count = searchData.size();
+                } else {
+                    for (int i = 0; i < mDataList.size(); i++) {
+                        mStartList.add(-1);
+                    }
+                    filterResults.values = mDataList;
+                    filterResults.count = mDataList.size();
                 }
                 return filterResults;
             }
@@ -112,32 +118,36 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultView
 
     @Override
     public void onBindViewHolder(ResultViewHolder viewHolder, int position) {
-        try {
-            SearchItem item = mSearchList.get(position);
+        SearchItem item = mSearchList.get(position);
 
-            int start = mStartList.get(position);
-            int end = start + mKeyLength;
+        if (mStartList.size() <= position) {
+            return;
+        }
 
-            viewHolder.icon_left.setImageResource(item.get_icon());
+        int start = mStartList.get(position);
+        int end = start + mKeyLength;
 
-            if (mTheme == SearchCodes.THEME_LIGHT) {
-                viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_light_icon));
-                viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_light_text));
+        viewHolder.icon_left.setImageResource(item.get_icon());
 
-                viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+        if (mTheme == SearchCodes.THEME_LIGHT) {
+            viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_light_icon));
+            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_light_text));
+
+            viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+            if (start != -1 && end < item.get_text().length()) {
                 Spannable s = (Spannable) viewHolder.text.getText();
                 s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_light_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
-            if (mTheme == SearchCodes.THEME_DARK) {
-                viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_dark_icon));
-                viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_dark_text));
+        }
+        if (mTheme == SearchCodes.THEME_DARK) {
+            viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_dark_icon));
+            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_dark_text));
 
-                viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+            viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
+            if (start != -1 && end < item.get_text().length()) {
                 Spannable s = (Spannable) viewHolder.text.getText();
                 s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_dark_text_highlight)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
-        } catch (Exception e) {
-            
         }
     }
 

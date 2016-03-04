@@ -124,15 +124,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ResultView
 
         if (mTheme == SearchCodes.THEME_LIGHT) {
             viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_light_icon));
-            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_light_text));
+            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_light_text_highlight));
 
             viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
             Spannable s = (Spannable) viewHolder.text.getText();
-            s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_light_text)), 0, s.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.search_light_text)), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         if (mTheme == SearchCodes.THEME_DARK) {
             viewHolder.icon_left.setColorFilter(ContextCompat.getColor(mContext, R.color.search_dark_icon));
-            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_dark_text));
+            viewHolder.text.setTextColor(ContextCompat.getColor(mContext, R.color.search_dark_text_highlight));
 
             viewHolder.text.setText(item.get_text(), TextView.BufferType.SPANNABLE);
             Spannable s = (Spannable) viewHolder.text.getText();

@@ -24,7 +24,7 @@ Sample application on:
 **Add the dependencies to your gradle file:**
 ```javascript
 dependencies {
-    compile 'com.klinkerapps:searchview:2.2.5@aar'
+    compile 'com.klinkerapps:searchview:2.2.5'
 }
 ```
 
